@@ -38,10 +38,13 @@ services:
     container_name: proxy
     volumes:
       - ./proxy/myconf.template:/etc/nginx/templates/default.conf.template
+      - ./certs:/etc/nginx/certs
     ports:
-      - 80:80
+      - "80:80"
+      - "443:443"
     depends_on:
       - front
       - back
     environment:
       - FRONTEND_PORT=${FRONTEND_PORT}
+      - FRONTEND_URL=${FRONTEND_URL}
